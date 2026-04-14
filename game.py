@@ -2,6 +2,6 @@ currency = 0
 currencypersecond = 1
 
 def increment():
-    global count
+    global currency
     count += currencypersecond
-    return count
+    return currency
