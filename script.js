@@ -15,6 +15,7 @@ async function main() {
     // Get reference to Python function
     pyClick = pyodide.globals.get("increment");
     pySecond = pyodide.globals.get("second");
+    pyCPS = pyodide.globals.get("CPS");
 
     // Hook up button
     document.getElementById("btn").onclick = () => {
@@ -25,7 +26,9 @@ async function main() {
     // Call second() every second
     setInterval(() => {
         let result = pySecond();
+        let CPS = pyCPS();
         document.getElementById("btn").innerText = "Currency: " + result;
+        document.getElementById("btn").innerText = "Currency Per Second " + CPS;
     }, 1000);
 }
 
