@@ -20,6 +20,11 @@ async function main() {
         let result = pyClick();  // call Python
         document.getElementById("btn").innerText = "Currency: " + result;
     };
+
+    // Call second() every second
+setInterval(() => {
+    pySecond();
+}, 1000);
 }
 
 main();
