@@ -9,3 +9,6 @@ def second():
     global currency
     currency = currency + currencypersecond
     return currency
+def CPS():
+    global currencypersecond
+    return currencypersecond
