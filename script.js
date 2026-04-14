@@ -24,7 +24,8 @@ async function main() {
 
     // Call second() every second
 setInterval(() => {
-    pySecond();
+    let result = pySecond();
+    document.getElementById("btn").innerText = "Currency: " + result;
 }, 1000);
 }
 
