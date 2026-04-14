@@ -14,7 +14,7 @@ async function main() {
 
     // Get reference to Python function
     pyClick = pyodide.globals.get("increment");
-    let pySecond = pyodide.globals.get("second");
+    pySecond = pyodide.globals.get("second");
 
     // Hook up button
     document.getElementById("btn").onclick = () => {
