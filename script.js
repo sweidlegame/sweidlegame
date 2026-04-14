@@ -8,6 +8,8 @@ async function main() {
     let response = await fetch("game.py?v=" + Date.now());
     let code = await response.text();
 
+    console.log(code);
+
     pyodide.runPython(code);
 
     // Get reference to Python function
