@@ -23,10 +23,10 @@ async function main() {
     };
 
     // Call second() every second
-setInterval(() => {
-    let result = pySecond();
-    document.getElementById("btn").innerText = "Currency: " + result;
-}, 1000);
+    setInterval(() => {
+        let result = pySecond();
+        document.getElementById("btn").innerText = "Currency: " + result;
+    }, 1000);
 }
 
 main();
