@@ -5,7 +5,7 @@ async function main() {
     pyodide = await loadPyodide();
 
     // Load your Python file
-    let response = await fetch("game.py");
+    let response = await fetch("game.py?v=" + Date.now());
     let code = await response.text();
 
     pyodide.runPython(code);
