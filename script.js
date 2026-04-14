@@ -16,7 +16,7 @@ async function main() {
     // Hook up button
     document.getElementById("btn").onclick = () => {
         let result = pyClick();  // call Python
-        document.getElementById("btn").innerText = "Clicks: " + result;
+        document.getElementById("btn").innerText = "Currency: " + result;
     };
 }
 
