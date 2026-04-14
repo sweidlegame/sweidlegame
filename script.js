@@ -28,7 +28,7 @@ async function main() {
         let result = pySecond();
         let CPS = pyCPS();
         document.getElementById("btn").innerText = "Currency: " + result;
-        document.getElementById("btn").innerText = "Currency Per Second " + CPS;
+        document.getElementById("CPS").innerText = "Currency Per Second " + CPS;
     }, 1000);
 }
 
