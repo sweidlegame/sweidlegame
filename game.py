@@ -15,10 +15,10 @@ class Producer:
             price = price**1.05
         return
 
-    def produce:
+    def produce(self):
         return self.owned*self.production*self.multiplier
 
-    def upgrade:
+    def upgrade(self):
         self.upgrademodifier += 0.50
 
 
