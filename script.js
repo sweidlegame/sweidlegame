@@ -44,6 +44,7 @@ async function main() {
         for (let i = 0; i < 5; i++) {
             let price = pyGetPrice(i);
             let owned = pyGetOwned(i);
+            let producing= pyGetProduction(i);
             let btn = document.getElementById("prod" + i);
 
             // Unlock next producer
@@ -54,7 +55,7 @@ async function main() {
             if (owned === 0) {
                 btn.innerText = `Buy Producer ${i + 1} (${price})`;
             } else {
-                btn.innerText = `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned}`;
+                btn.innerText = `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned} | Producing: ${owned}*${producing}`;
             }
         }
     }
