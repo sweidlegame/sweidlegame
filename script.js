@@ -1,34 +1,49 @@
 let pyodide;
 let pyClick;
+let pySecond;
+let pyCPS;
+let pyBuyProducer;
+let pyProducerPrice;
 
 async function main() {
     pyodide = await loadPyodide();
 
-    // Load your Python file
     let response = await fetch("game.py?v=" + Date.now());
     let code = await response.text();
 
-    console.log(code);
-
     pyodide.runPython(code);
 
-    // Get reference to Python function
     pyClick = pyodide.globals.get("increment");
     pySecond = pyodide.globals.get("second");
     pyCPS = pyodide.globals.get("CPS");
+    pyBuyProducer = pyodide.globals.get("buy_producer");
+    pyProducerPrice = pyodide.globals.get("producer_price");
 
-    // Hook up button
+    // Currency button
     document.getElementById("btn").onclick = () => {
-        let result = pyClick();  // call Python
-        document.getElementById("btn").innerText = "Currency: " + result;
+        let result = pyClick();
+        updateDisplay(result);
     };
 
-    // Call second() every second
+    // Producer button
+    document.getElementById("prod").onclick = () => {
+        let result = pyBuyProducer();
+        updateDisplay(result);
+    };
+
+    function updateDisplay(currency) {
+        let CPS = pyCPS();
+        let price = pyProducerPrice();
+
+        document.getElementById("btn").innerText = "Currency: " + Math.floor(currency);
+        document.getElementById("CPS").innerText = "Currency Per Second: " + CPS;
+        document.getElementById("prod").innerText = "Buy Producer (" + price + ")";
+    }
+
+    // Tick every second
     setInterval(() => {
         let result = pySecond();
-        let CPS = pyCPS();
-        document.getElementById("btn").innerText = "Currency: " + result;
-        document.getElementById("CPS").innerText = "Currency Per Second " + CPS;
+        updateDisplay(result);
     }, 1000);
 }
 
