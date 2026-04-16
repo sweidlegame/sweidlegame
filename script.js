@@ -46,7 +46,7 @@ async function main() {
         for (let i = 0; i < 5; i++) {
             let price = pyGetPrice(i);
             let owned = pyGetOwned(i);
-            let producing= pyGetProduction(i);
+            let producing = pyGetProduction(i);
             let btn = document.getElementById("prod" + i);
 
             // Unlock next producer
