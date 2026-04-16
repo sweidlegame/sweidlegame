@@ -16,6 +16,8 @@ async function main() {
     pyBuyProducer = pyodide.globals.get("buy_producer");
     pyGetPrice = pyodide.globals.get("get_price");
     pyGetOwned = pyodide.globals.get("get_owned");
+    pyGetProduction = pyodide.globals.get("get_production");
+
 
     // Currency click
     document.getElementById("btn").onclick = () => {
