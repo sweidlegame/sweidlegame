@@ -59,3 +59,6 @@ def get_price(index):
 
 def get_owned(index):
     return producers[index].owned
+    
+def get_production(index):
+    return producers[index].production
