@@ -58,7 +58,7 @@ async function main() {
             if (owned === 0) {
                 btn.innerText = `Buy Producer ${i + 1} (${price})`;
             } else {
-                btn.innerText = `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned} | Producing: ${producing} each, or${total} in total `;
+                btn.innerText = `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned} | Producing: ${producing} per second each, or ${total} in total `;
             }
         }
     }
