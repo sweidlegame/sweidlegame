@@ -1,10 +1,12 @@
-class Producer:
+class Producer: 
+    # Represents an item the player can buy to generate currency automatically.
     def __init__(self, price, production):
-        self.owned = 0
-        self.price = price
-        self.production = production
+        self.owned = 0           # How many of this producer the player has
+        self.price = price       # Current cost to buy one
+        self.production = production # How much currency this generates per unit
 
     def purchase(self):
+        # Attempts to buy a producer. Deducts currency and scales the price.
         global currency
         global currencypersecond
 
@@ -12,88 +14,118 @@ class Producer:
             currency -= self.price
             self.owned += 1
 
-            # Add CPS
+            # Increase the base Currency Per Second (CPS)
             currencypersecond += self.production
 
-            # Scale cost
+            # Exponential scaling: The price triples after every purchase
             self.price *= 3
 
         return currency
 
+
 class Drain:
+    # A mechanic that periodically reduces the player's income (a 'debuff').
     def __init__(self, timeM, debuff):
-        self.timeS = timeM * 60 # default time between drains
-        self.nextDrainTimerSec = self.timeS  # convert mins -> secs
-        self.currentDrainTimeS = 0 # the amount of time the drain has been active (sec)
-        self.drainActive = False # controls if the drain is active
-        self.drainDebuff = debuff # as a %; CPS * debuff = drainCPS
+        self.timeS = timeM * 60           # Convert minutes input to seconds
+        self.nextDrainTimerSec = self.timeS # Countdown until the next drain starts
+        self.drainActive = False          # Current state of the drain
+        self.drainDebuff = debuff         # The multiplier (e.g., 0.5 = 50% income)
 
     def stop_drain(self):
-        self.drainActive = False # disable drain
+        # Resets the drain timer and deactivates the penalty.
+        self.drainActive = False
+        self.nextDrainTimerSec = self.timeS
 
+    def drain_increment_sec(self):
+        # Reduces the timer by 1 second. If it hits 0, the drain activates
+        if self.drainActive:
+            return # Don't count down if already active
 
-    def drain_increment_sec(self): # this should activate every second even when drain is off
-        global currencypersecond
-        global minigameactive
+        self.nextDrainTimerSec -= 1
 
-        if self.drainActive: # while the drain is active
-            minigameactive = True
-            currencypersecond = currencypersecond * self.drainDebuff # debuff production
-            self.currentDrainTimeS += 1 # increment the amount of time the drain has been active
-
-        else: # while the drain is inactive
-            minigameactive = False
-            self.nextDrainTimerSec -= 1 # reduce timer by one sec
-
-        # start the next drain when the timer runs out
-        if self.nextDrainTimerSec == 0:
+        if self.nextDrainTimerSec <= 0:
             self.drainActive = True
-            self.nextDrainTimerSec = self.timeS + self.currentDrainTimeS # reset timer to default + time left over
-            self.currentDrainTimeS = 0 # reset current drain time
+
+    def get_multiplier(self):
+        # Returns the current income multiplier (1.0 if healthy, debuff if active)
+        if self.drainActive:
+            return self.drainDebuff
+        return 1
 
 
-# --- GAME STATE ---
-currency = 0 # total currency
-currencypersecond = 1 # currency added tot total per second
-minigameactive = False # if the drain minigame is active
-# should the minigame var be here or in the drain class??
+# --- GLOBAL GAME STATE ---
+currency = 0             # Total money available to spend
+currencypersecond = 1    # Total money earned every second (starts at 1)
 
+# Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
+drain = Drain(0.25, 0.5)
 
-# Create 5 producers
+# Initialize a list of Producer objects with varying prices and yields
 producers = [
-    Producer(10, 3),     # Producer 1
-    Producer(500, 10),   # Producer 2
-    Producer(2500, 25),  # Producer 3
-    Producer(10000, 100),# Producer 4
-    Producer(50000, 300) # Producer 5
+    Producer(10, 3),      # Cheap, low yield
+    Producer(500, 10),
+    Producer(2500, 25),
+    Producer(10000, 100),
+    Producer(50000, 300)  # Expensive, high yield
 ]
 
 
-# --- FUNCTIONS FOR JS ---
-def increment():
-    global currency
-    global currencypersecond
+# --- API FUNCTIONS (Called by JavaScript) ---
 
+def increment():
+    # Manual click function: Adds CPS to currency immediately
+    global currency
     currency += currencypersecond
     return currency
+
 
 def second():
+    # Main tick function: Ran every 1 second by the JS game loop
     global currency
-    Drain.drain_increment_sec() # update drain every second
-    currency += currencypersecond
+
+    # Handle the drain countdown and status
+    drain.drain_increment_sec()
+    multiplier = drain.get_multiplier()
+
+    # Calculate income: (Base CPS) * (0.5 if drain is active, else 1.0)
+    currency += currencypersecond * multiplier
     return currency
 
+
 def CPS():
+    # Returns the current base Currency Per Second
     return currencypersecond
 
+
 def buy_producer(index):
+    # Bridge function to allow JS to trigger a purchase by index
     return producers[index].purchase()
 
+
 def get_price(index):
+    # Returns the current price of a specific producer
     return producers[index].price
 
+
 def get_owned(index):
+    # Returns how many of a specific producer are owned
     return producers[index].owned
-    
+
+
 def get_production(index):
+    # Returns how much a single unit of this producer generates
     return producers[index].production
+
+
+def is_drain_active():
+    # Checks if the penalty is currently affecting income
+    return drain.drainActive
+
+def get_drain_multiplier():
+    # Checks the severity of the current drain
+    return drain.get_multiplier()
+
+def stop_drain():
+    # Allows the player to 'fix' the drain and resume normal production
+    drain.stop_drain()
+    return currency
