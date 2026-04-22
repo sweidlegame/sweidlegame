@@ -20,10 +20,44 @@ class Producer:
 
         return currency
 
+class Drain:
+    def __init__(self, timeM, debuff):
+        self.timeS = timeM * 60 # default time between drains
+        self.nextDrainTimerSec = self.timeS  # convert mins -> secs
+        self.currentDrainTimeS = 0 # the amount of time the drain has been active (sec)
+        self.drainActive = False # controls if the drain is active
+        self.drainDebuff = debuff # as a %; CPS * debuff = drainCPS
+
+    def stop_drain(self):
+        self.drainActive = False # disable drain
+
+
+    def drain_increment_sec(self): # this should activate every second even when drain is off
+        global currencypersecond
+        global minigameactive
+
+        if self.drainActive: # while the drain is active
+            minigameactive = True
+            currencypersecond = currencypersecond * self.drainDebuff # debuff production
+            self.currentDrainTimeS += 1 # increment the amount of time the drain has been active
+
+        else: # while the drain is inactive
+            minigameactive = False
+            self.nextDrainTimerSec -= 1 # reduce timer by one sec
+
+        # start the next drain when the timer runs out
+        if self.nextDrainTimerSec == 0:
+            self.drainActive = True
+            self.nextDrainTimerSec = self.timeS + self.currentDrainTimeS # reset timer to default + time left over
+            self.currentDrainTimeS = 0 # reset current drain time
+
 
 # --- GAME STATE ---
-currency = 0
-currencypersecond = 1
+currency = 0 # total currency
+currencypersecond = 1 # currency added tot total per second
+minigameactive = False # if the drain minigame is active
+# should the minigame var be here or in the drain class??
+
 
 # Create 5 producers
 producers = [
@@ -45,6 +79,7 @@ def increment():
 
 def second():
     global currency
+    Drain.drain_increment_sec() # update drain every second
     currency += currencypersecond
     return currency
 
