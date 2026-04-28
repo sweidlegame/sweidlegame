@@ -115,6 +115,7 @@ def increment():
     global currency
 
     multiplier = drain.get_multiplier()
+    multiplier += 0.05*multiplier*Simon.getstreak()
     currency += 0.35*currencypersecond*multiplier
     
     currency = math.ceil(currency)
@@ -128,6 +129,7 @@ def second():
     # Handle the drain countdown and status
     drain.drain_increment_sec()
     multiplier = drain.get_multiplier()
+    multiplier += 0.05*multiplier*Simon.getstreak()
 
     # Calculate income: (Base CPS) * (0.5 if drain is active, else 1.0)
     currency += currencypersecond * multiplier
