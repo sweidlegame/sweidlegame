@@ -91,8 +91,8 @@ class Simon:
 
 
 # --- GLOBAL GAME STATE ---
-currency = 0             # Total money available to spend
-currencypersecond = 1    # Total money earned every second (starts at 1)
+currency = 10             # Total money available to spend
+currencypersecond = 0    # Total money earned every second (starts at 1)
 
 # Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
 drain = Drain(0.25, 0.5)
@@ -113,7 +113,8 @@ Simon = Simon(0,7)
 def increment():
     # Manual click function: Adds CPS to currency immediately
     global currency
-    currency += currencypersecond
+    currency += 0.35*currencypersecond
+    currency = math.ceil(currency)
     return currency
 
 
