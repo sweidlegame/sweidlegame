@@ -93,8 +93,10 @@ class Simon:
         if self.currentstreak > self.streak:
             self.streak = self.currentstreak
         return 1
-    def getstreak(self):
+    def gethighscore(self):
         return self.streak
+    def getstreak(self):
+        return self.currentstreak
     def getsequence(self):
         return self.sequence
         
@@ -125,7 +127,7 @@ def increment():
     global currency
 
     multiplier = drain.get_multiplier()
-    multiplier += 0.05*multiplier*Simon.getstreak()
+    multiplier += 0.05*multiplier*Simon.gethighscore()
     currency += 0.35*currencypersecond*multiplier
     if currencypersecond == 0:
         currency += 1
@@ -142,7 +144,7 @@ def second():
     # Handle the drain countdown and status
     drain.drain_increment_sec()
     multiplier = drain.get_multiplier()
-    multiplier += 0.05*multiplier*Simon.getstreak()
+    multiplier += 0.05*multiplier*Simon.gethighscore()
 
     # Calculate income: (Base CPS) * (0.5 if drain is active, else 1.0)
     currency += currencypersecond * multiplier
