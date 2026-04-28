@@ -62,21 +62,21 @@ class Simon:
         self.sequence = []
         self.currentstreak = 0
         self.passed = False
-    def clearlose():
+    def clearlose(self):
         #Clear for initialization or loss
         self.currentstreak = 0
         self.sequence = []
-    def clearwin():
+    def clearwin(self):
         #Repel drain and clear for next use on event of loss of a streak that already passed the victory point
         Drain.stopdrain()
         self.clearlose()
 
-    def genentry():
+    def genentry(self):
         return random.choice(["red", "green", "blue","yellow"])
         
-    def step():
+    def step(self):
         sequence = sequence.append(genentry())
-    def attempt(playerseq):
+    def attempt(self,playerseq):
         i = 0
         while i < len(self.sequence):
             if playerseq[i] == self.sequence[i]:
@@ -92,9 +92,9 @@ class Simon:
         if self.currentstreak > self.streak:
             self.streak = self.currentstreak
         return 1
-    def getstreak():
+    def getstreak(self):
         return self.streak
-    def getsequence():
+    def getsequence(self):
         return self.sequence
         
 
