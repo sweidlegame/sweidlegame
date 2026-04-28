@@ -1,5 +1,5 @@
 let pyodide;
-let game = "Simon" //Game lock if we want to add others later, not expected to be touched.
+let game = "Simon"; //Game lock if we want to add others later, not expected to be touched.
 // Placeholders for Python functions. We will 'capture' these from game.py later.
 let pyClick, pySecond, pyCPS;
 let pyBuyProducer, pyGetPrice, pyGetOwned, pyGetProduction;
