@@ -1,10 +1,11 @@
 let pyodide;
-let one = 1
+let game = "Simon" //Game lock if we want to add others later, not expected to be touched.
 // Placeholders for Python functions. We will 'capture' these from game.py later.
 let pyClick, pySecond, pyCPS;
 let pyBuyProducer, pyGetPrice, pyGetOwned, pyGetProduction;
 let pyIsDrainActive, pyStopDrain;
 let pyGetDrainMultiplier;
+
 
 
 // The core setup function. Runs once when the page loads. 
@@ -71,20 +72,23 @@ async function main() {
             let effective = cps * multiplier;
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
-        
-            document.getElementById("simonred").style.display = "block"
-            document.getElementById("simongreen").style.display = "block"
-            document.getElementById("simonblue").style.display = "block" 
-            document.getElementById("simonyellow").style.display = "block"
+            if game == "Simon"
+                document.getElementById("simonred").style.display = "block"
+                document.getElementById("simongreen").style.display = "block"
+                document.getElementById("simonblue").style.display = "block" 
+                document.getElementById("simonyellow").style.display = "block"
+                document.getElementById("simonreset").style.display = "block"
+            
         
         }else {
             document.getElementById("CPS").innerText =
                 "Currency Per Second: " + cps;
-        
-            document.getElementById("simonred").style.display = "none"
-            document.getElementById("simongreen").style.display = "none"
-            document.getElementById("simonblue").style.display = "none" 
-            document.getElementById("simonyellow").style.display = "none"
+            if game == "Simon":
+                document.getElementById("simonred").style.display = "none"
+                document.getElementById("simongreen").style.display = "none"
+                document.getElementById("simonblue").style.display = "none" 
+                document.getElementById("simonyellow").style.display = "none"
+                document.getElementById("simonreset").style.display = "none"
         }
 
         // Show "Fix Drain" button only when the drain is actually active
