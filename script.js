@@ -1,5 +1,5 @@
 let pyodide;
-
+let game;
 // Placeholders for Python functions. We will 'capture' these from game.py later.
 let pyClick, pySecond, pyCPS;
 let pyBuyProducer, pyGetPrice, pyGetOwned, pyGetProduction;
@@ -12,7 +12,7 @@ let pyGetDrainMultiplier;
 async function main() {
     // Initialize Pyodide (Downloading the Python runtime)
     pyodide = await loadPyodide();
-    let game = "Simon"; //Game lock if we want to add others later, not expected to be touched.
+    game = "Simon"; //Game lock if we want to add others later, not expected to be touched.
 
     // Fetch game.py and execute it inside Pyodide
     // Date.now() is added to the URL to prevent the browser from using an old cached version
