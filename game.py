@@ -19,7 +19,7 @@ class Producer:
             currencypersecond += self.production
 
             # Exponential scaling: The price triples after every purchase
-            self.price = self.price ** 1.05
+            self.price = int(self.price ** 1.05)
 
         return currency
 
