@@ -89,6 +89,7 @@ class Simon:
                 return 0
             i = i+1
         self.currentstreak += 1
+        self.step()
         if self.currentstreak > self.streak:
             self.streak = self.currentstreak
         return 1
