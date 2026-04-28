@@ -68,20 +68,19 @@ async function main() {
 
         // Update CPS display and show if a drain is reducing income
         if (drainActive) {
-            let effective = cps * multiplier; // Calculate final income
+            let effective = cps * multiplier;
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
-            document.getElementById("simonred").style.display = "none"
-            document.getElementById("simongreen").style.display = "none"
-            document.getElementById("simonblue").style.display = "none"
-            document.getElementById("simonyellow").style.display = "none"
-        } else {
+        
+            ["simonred", "simongreen", "simonblue", "simonyellow"]
+                .forEach(id => setDisplay(id, "none"));
+        
+        }else {
             document.getElementById("CPS").innerText =
                 "Currency Per Second: " + cps;
-            document.getElementById("simonred").style.display = "block"
-            document.getElementById("simongreen").style.display = "block"
-            document.getElementById("simonblue").style.display = "block"
-            document.getElementById("simonyellow").style.display = "block"
+        
+            ["simonred", "simongreen", "simonblue", "simonyellow"]
+                .forEach(id => setDisplay(id, "block"));
         }
 
         // Show "Fix Drain" button only when the drain is actually active
