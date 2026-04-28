@@ -55,8 +55,8 @@ class Drain:
 class Simon: 
     # Represents an item the player can buy to generate currency automatically.
     def __init__(self, streak, requirement):
-        self.streak = 0           # Highest streak, so it can provide bonuses later
-        self.requirement     # what streak is required to remove drain?
+        self.streak = streak         # Highest streak, so it can provide bonuses later
+        self.requirement = requirement     # what streak is required to remove drain?
         self.sequence = []
         self.currentstreak = 0
     def clear():
