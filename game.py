@@ -1,4 +1,5 @@
 import random
+import math
 class Producer: 
     # Represents an item the player can buy to generate currency automatically.
     def __init__(self, price, production):
@@ -19,7 +20,8 @@ class Producer:
             currencypersecond += self.production
 
             # Exponential scaling: The price triples after every purchase
-            self.price = int(self.price ** 1.12)
+            self.price = self.price ** 1.12
+            self.price = math.ceil(self.price)
 
         return currency
 
