@@ -126,8 +126,11 @@ def increment():
     multiplier = drain.get_multiplier()
     multiplier += 0.05*multiplier*Simon.getstreak()
     currency += 0.35*currencypersecond*multiplier
+    if currencypersecond = 0:
+        currency += 1
     
     currency = math.ceil(currency)
+   
     return currency
 
 
