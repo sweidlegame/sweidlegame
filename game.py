@@ -1,3 +1,4 @@
+import random
 class Producer: 
     # Represents an item the player can buy to generate currency automatically.
     def __init__(self, price, production):
@@ -18,7 +19,7 @@ class Producer:
             currencypersecond += self.production
 
             # Exponential scaling: The price triples after every purchase
-            self.price *= 3
+            self.price ** 1.05
 
         return currency
 
@@ -51,6 +52,40 @@ class Drain:
         if self.drainActive:
             return self.drainDebuff
         return 1
+class Simon: 
+    # Represents an item the player can buy to generate currency automatically.
+    def __init__(self, streak, requirement):
+        self.streak = 0           # Highest streak, so it can provide bonuses later
+        self.requirement     # what streak is required to remove drain?
+        self.sequence = []
+        self.currentstreak = 0
+    def clear():
+        self.currentstreak = 0
+        self.sequence = []
+
+    def genentry():
+        return random.choice(["red", "green", "blue","yellow"])
+        
+    def step():
+        sequence = sequence.append(genentry())
+    def attempt(playerseq):
+        i = 0
+        while i < len(self.sequence):
+            if playerseq[i] == self.sequence[i]:
+                True
+            else:
+                self.clear()
+                return 0
+            i = i+1
+        self.currentstreak += 1
+        if self.currentstreak > self.streak:
+            self.streak = self.currentstreak
+        return 1
+    def getstreak():
+        return self.streak
+    def getsequence():
+        return self.sequence
+        
 
 
 # --- GLOBAL GAME STATE ---
@@ -68,6 +103,7 @@ producers = [
     Producer(10000, 100),
     Producer(50000, 300)  # Expensive, high yield
 ]
+Simon = Simon(0,7)
 
 
 # --- API FUNCTIONS (Called by JavaScript) ---
