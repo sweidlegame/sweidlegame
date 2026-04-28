@@ -68,7 +68,7 @@ class Simon:
         self.sequence = []
     def clearwin(self):
         #Repel drain and clear for next use on event of loss of a streak that already passed the victory point
-        Drain.stopdrain()
+        Drain.stop_drain()
         self.clearlose()
 
     def genentry(self):
@@ -186,3 +186,10 @@ def stop_drain():
     # Allows the player to 'fix' the drain and resume normal production
     drain.stop_drain()
     return currency
+def getstreak():
+    return Simon.getstreak()
+def attempt(sequence):
+    return Simon.attempt(sequence)
+def getcurrency():
+    return currency
+    
