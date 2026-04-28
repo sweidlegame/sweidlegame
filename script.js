@@ -73,14 +73,14 @@ async function main() {
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
         
             ["simonred", "simongreen", "simonblue", "simonyellow"]
-                .forEach(id => setDisplay(id, "none"));
+                .forEach(id => setDisplay(id, "block"));
         
         }else {
             document.getElementById("CPS").innerText =
                 "Currency Per Second: " + cps;
         
             ["simonred", "simongreen", "simonblue", "simonyellow"]
-                .forEach(id => setDisplay(id, "block"));
+                .forEach(id => setDisplay(id, "none"));
         }
 
         // Show "Fix Drain" button only when the drain is actually active
