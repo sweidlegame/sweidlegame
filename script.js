@@ -31,6 +31,9 @@ async function main() {
     pyIsDrainActive = pyodide.globals.get("is_drain_active");
     pyStopDrain = pyodide.globals.get("stop_drain");
     pyGetDrainMultiplier = pyodide.globals.get("get_drain_multiplier");
+    pyGetStreak = pyodide.globals.get("getstreak");
+    pyAttempt = pyodide.globals.get("attempt");
+    
     let sequence = []
 
     // --- EVENT LISTENERS ---
@@ -43,8 +46,13 @@ async function main() {
 
     // Clicking the "Fix Drain" button
     document.getElementById("drainBtn").onclick = () => {
-        let result = pyStopDrain(); // Calls Python 'stop_drain()'
-        updateDisplay(result);
+        if game != "Simon":
+            let result = pyStopDrain(); // Calls Python 'stop_drain()'
+            updateDisplay(result);
+        else: 
+            pyAttempt(sequence)
+            sequence = []
+        
     };
 
     // Set up click events for all 5 producer buttons
@@ -55,6 +63,27 @@ async function main() {
             updateDisplay(result);
         };
     }
+
+    simonred.onclick = () => {
+            sequence.push("red")
+            updateDisplay(pyClick());
+    };
+    simonblue.onclick = () => {
+            sequence.push("blue")
+            updateDisplay(pyClick());
+    };
+    simongreen.onclick = () => {
+            sequence.push("green")
+            updateDisplay(pyClick());
+    };
+    simonyellow.onclick = () => {
+            sequence.push("yellow")
+            updateDisplay(pyClick());
+    };
+    simonreset.onclick = () => {
+            sequence = []
+            updateDisplay(pyClick());
+    };
 
     
     // Updates the text and visibility of all UI elements based on current game state.    
@@ -70,14 +99,19 @@ async function main() {
         // Update CPS display and show if a drain is reducing income
         if (drainActive) {
             let effective = cps * multiplier;
+            document.getElementById("drainBtn").innerText = "Fix Drain"
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
+            document.getElementById("sequence").innerText =
+                `Sequence: ${sequence}`;
             if game == "Simon"
                 document.getElementById("simonred").style.display = "block"
                 document.getElementById("simongreen").style.display = "block"
                 document.getElementById("simonblue").style.display = "block" 
                 document.getElementById("simonyellow").style.display = "block"
                 document.getElementById("simonreset").style.display = "block"
+                document.getElementById("sequence").style.display = "block"
+                document.getElementById("drainBtn").innerText = "Submit sequence"
             
         
         }else {
@@ -89,6 +123,7 @@ async function main() {
                 document.getElementById("simonblue").style.display = "none" 
                 document.getElementById("simonyellow").style.display = "none"
                 document.getElementById("simonreset").style.display = "none"
+                document.getElementById("sequence").style.display = "none"
         }
 
         // Show "Fix Drain" button only when the drain is actually active
