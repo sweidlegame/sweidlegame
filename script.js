@@ -1,5 +1,6 @@
 let pyodide;
 let game;
+game = "Simon"
 // Placeholders for Python functions. We will 'capture' these from game.py later.
 let pyClick, pySecond, pyCPS;
 let pyBuyProducer, pyGetPrice, pyGetOwned, pyGetProduction;
