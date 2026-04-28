@@ -30,6 +30,7 @@ async function main() {
     pyIsDrainActive = pyodide.globals.get("is_drain_active");
     pyStopDrain = pyodide.globals.get("stop_drain");
     pyGetDrainMultiplier = pyodide.globals.get("get_drain_multiplier");
+    let sequence = []
 
     // --- EVENT LISTENERS ---
 
@@ -70,9 +71,17 @@ async function main() {
             let effective = cps * multiplier; // Calculate final income
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
+            document.getElementById("simonred").style.display = "none"
+            document.getElementById("simongreen").style.display = "none"
+            document.getElementById("simonblue").style.display = "none"
+            document.getElementById("simonyellow").style.display = "none"
         } else {
             document.getElementById("CPS").innerText =
                 "Currency Per Second: " + cps;
+            document.getElementById("simonred").style.display = "block"
+            document.getElementById("simongreen").style.display = "block"
+            document.getElementById("simonblue").style.display = "block"
+            document.getElementById("simonyellow").style.display = "block"
         }
 
         // Show "Fix Drain" button only when the drain is actually active
