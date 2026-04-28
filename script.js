@@ -48,12 +48,12 @@ async function main() {
 
     // Clicking the "Fix Drain" button
     document.getElementById("drainBtn").onclick = () => {
-        if (game != "Simon"):
+        if (game != "Simon"){
             let result = pyStopDrain(); // Calls Python 'stop_drain()'
             updateDisplay(result);
-        else: 
+        } else{ 
             pyAttempt(sequence)
-            sequence = []
+            sequence = []}
         
     };
 
@@ -106,26 +106,26 @@ async function main() {
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
             document.getElementById("sequence").innerText =
                 `Sequence: ${sequence}`;
-            if (game == "Simon")
+            if (game == "Simon"){
                 document.getElementById("simonred").style.display = "block"
                 document.getElementById("simongreen").style.display = "block"
                 document.getElementById("simonblue").style.display = "block" 
                 document.getElementById("simonyellow").style.display = "block"
                 document.getElementById("simonreset").style.display = "block"
                 document.getElementById("sequence").style.display = "block"
-                document.getElementById("drainBtn").innerText = "Submit sequence"
+                document.getElementById("drainBtn").innerText = "Submit sequence"}
             
         
         }else {
             document.getElementById("CPS").innerText =
                 "Currency Per Second: " + cps;
-            if (game == "Simon"):
+            if (game == "Simon"){
                 document.getElementById("simonred").style.display = "none"
                 document.getElementById("simongreen").style.display = "none"
                 document.getElementById("simonblue").style.display = "none" 
                 document.getElementById("simonyellow").style.display = "none"
                 document.getElementById("simonreset").style.display = "none"
-                document.getElementById("sequence").style.display = "none"
+                document.getElementById("sequence").style.display = "none"}
         }
 
         // Show "Fix Drain" button only when the drain is actually active
