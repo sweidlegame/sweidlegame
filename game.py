@@ -61,9 +61,15 @@ class Simon:
         self.requirement = requirement     # what streak is required to remove drain?
         self.sequence = []
         self.currentstreak = 0
-    def clear():
+        self.passed = False
+    def clearlose():
+        #Clear for initialization or loss
         self.currentstreak = 0
         self.sequence = []
+    def clearwin():
+        #Repel drain and clear for next use on event of loss of a streak that already passed the victory point
+        Drain.stopdrain()
+        self.clearlose()
 
     def genentry():
         return random.choice(["red", "green", "blue","yellow"])
@@ -76,7 +82,10 @@ class Simon:
             if playerseq[i] == self.sequence[i]:
                 True
             else:
-                self.clear()
+                if self.currentstreak > self.requirement:
+                    self.clearwin()
+                else:
+                    self.clearlose()
                 return 0
             i = i+1
         self.currentstreak += 1
