@@ -113,7 +113,10 @@ Simon = Simon(0,7)
 def increment():
     # Manual click function: Adds CPS to currency immediately
     global currency
-    currency += 0.35*currencypersecond
+
+    multiplier = drain.get_multiplier()
+    currency += 0.35*currencypersecond*multiplier
+    
     currency = math.ceil(currency)
     return currency
 
