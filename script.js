@@ -128,45 +128,7 @@ async function main() {
                 document.getElementById("streak").style.display = "block"
                 document.getElementById("drainBtn").innerText = "Submit sequence"
                 document.getElementById("streak").innerText = `Current streak ${streak}  Highest streak ${high}   providing a ${multi}x boost to productivity `}
-                console.log(test);
-                console.log(document.getElementById("red"));
-                console.log(test.length);
-                if (test.length == 1){
-                    if (test[0] == "red"){
-                        document.getElementById("red").style.opacity = "1";
-                        //document.getElementById("red").style.opacity = "0.01";
-                        document.getElementById("blue").style.opacity = "0.01";
-                        document.getElementById("green").style.opacity = "0.01";
-                        document.getElementById("yellow").style.opacity = "0.01";
-                    }
-                    if (test[0] == "blue"){
-                        document.getElementById("blue").style.opacity = "1";
-                        document.getElementById("red").style.opacity = "0.01";
-                       // document.getElementById("blue").style.opacity = "0.01";
-                        document.getElementById("green").style.opacity = "0.01";
-                        document.getElementById("yellow").style.opacity = "0.01";
-                    }
-                    if (test[0] == "green"){
-                        document.getElementById("green").style.opacity = "1";
-                        document.getElementById("red").style.opacity = "0.01";
-                        document.getElementById("blue").style.opacity = "0.01";
-                        //document.getElementById("green").style.opacity = "0.01";
-                        document.getElementById("yellow").style.opacity = "0.01";
-                    }
-                    if (test[0] == "yellow"){
-                        document.getElementById("yellow").style.opacity = "1";
-                        document.getElementById("red").style.opacity = "0.01";
-                        document.getElementById("blue").style.opacity = "0.01";
-                        document.getElementById("green").style.opacity = "0.01";
-                      //  document.getElementById("yellow").style.opacity = "0.01";
-                    }
-                }
-            else{
-                document.getElementById("red").style.opacity = "0.01";
-                document.getElementById("blue").style.opacity = "0.01";
-                document.getElementById("green").style.opacity = "0.01";
-                document.getElementById("yellow").style.opacity = "0.01";
-            }
+
                      
             
             
