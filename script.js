@@ -136,8 +136,7 @@ async function main() {
                 document.getElementById("streak").style.display = "block"
                 document.getElementById("drainBtn").innerText = "Submit sequence"
                 document.getElementById("streak").innerText = `Current streak ${streak}  Highest streak ${high}   providing a ${multi}x boost to productivity `}
-                if (shown == 0){
-                    document.getElementById("simonplay").style.display = "block"}
+                document.getElementById("simonplay").style.display = "block"
                      
             
             
