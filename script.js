@@ -54,7 +54,7 @@ async function main() {
     };
     document.getElementById("simonplay").onclick = () => {
         test = pySimonSequence();
-        document.getElementById("simonplay").insideText = test.length
+        document.getElementById("simonplay").insideText = `SEQUENCE: ${test}     LENGTH: ${test.length}`
        // shown = 1
         updateDisplay(pyGetCurrency)
     };
