@@ -54,8 +54,41 @@ async function main() {
     };
     document.getElementById("simonplay").onclick = () => {
         test = pySimonSequence();
-        document.getElementById("simonplay").innerText = `SEQUENCE: ${test}     LENGTH: ${test.length}`
-       // shown = 1
+        i = 0;
+        while  (i < test.length){
+            color = test[i]
+            if (color = "red") {
+                document.getElementById("red").style.display = "block"
+                document.getElementById("blue").style.display = "none"
+                document.getElementById("green").style.display = "none"
+                document.getElementById("yellow").style.display = "none"
+            }
+            if (color = "blue) {
+                document.getElementById("red").style.display = "none"
+                document.getElementById("blue").style.display = "block"
+                document.getElementById("green").style.display = "none"
+                document.getElementById("yellow").style.display = "none"
+            }
+            if (color = "green") {
+                document.getElementById("red").style.display = "none"
+                document.getElementById("blue").style.display = "none"
+                document.getElementById("green").style.display = "block"
+                document.getElementById("yellow").style.display = "none"
+            }
+            if (color = "yellow") {
+                document.getElementById("red").style.display = "none"
+                document.getElementById("blue").style.display = "none"
+                document.getElementById("green").style.display = "none"
+                document.getElementById("yellow").style.display = "block"
+            }
+            setTimeout(() => i++, 750);
+            
+        }
+                document.getElementById("red").style.display = "none"
+                document.getElementById("blue").style.display = "none"
+                document.getElementById("green").style.display = "none"
+                document.getElementById("yellow").style.display = "none"
+        shown = 1;
         updateDisplay(pyGetCurrency)
     };
 
@@ -151,7 +184,13 @@ async function main() {
                 document.getElementById("simonyellow").style.display = "none"
                 document.getElementById("simonreset").style.display = "none"
                 document.getElementById("streak").style.display = "none"
-                document.getElementById("sequence").style.display = "none"}
+                document.getElementById("sequence").style.display = "none"
+                document.getElementById("red").style.display = "none"
+                document.getElementById("blue").style.display = "none"
+                document.getElementById("green").style.display = "none"
+                document.getElementById("yellow").style.display = "none"
+            
+            }
         }
 
         // Show "Fix Drain" button only when the drain is actually active
