@@ -66,6 +66,7 @@ class Simon:
         #Clear for initialization or loss
         self.currentstreak = 0
         self.sequence = []
+        self.step()
     def clearwin(self):
         #Repel drain and clear for next use on event of loss of a streak that already passed the victory point
         Drain.stop_drain()
@@ -106,6 +107,7 @@ class Simon:
 currency = 10             # Total money available to spend
 currencypersecond = 0    # Total money earned every second (starts at 1)
 Simon = Simon(0,7)
+Simon.clearlose()
 # Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
 drain = Drain(0.25, 0.5)
 
