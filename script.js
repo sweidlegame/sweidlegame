@@ -33,8 +33,10 @@ async function main() {
     pyIsDrainActive = pyodide.globals.get("is_drain_active");
     pyStopDrain = pyodide.globals.get("stop_drain");
     pyGetDrainMultiplier = pyodide.globals.get("get_drain_multiplier");
-    pyGetStreak = pyodide.globals.get("getstreak");
+    pySimonGetStreak = pyodide.globals.get("simongetstreak");
     pyAttempt = pyodide.globals.get("attempt");
+    pySimonGetHigh = pyodide.globals.get("simongethigh");
+    pySimonSequence = pyodide.globals.get("simongetsequence");
     
     let sequence = []
 
@@ -102,19 +104,26 @@ async function main() {
         // Update CPS display and show if a drain is reducing income
         if (drainActive) {
             let effective = cps * multiplier;
+            let test = pyGetSequence();
             document.getElementById("drainBtn").innerText = "Fix Drain"
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
             document.getElementById("sequence").innerText =
-                `Sequence: ${sequence}`;
+                `Sequence: ${sequence}, Correct sequence for testing:  ${test} `;
             if (game == "Simon"){
+                let streak = pySimonGetStreak();
+                let high = pySimonGetHigh();
+                let multi = 1 + (high*0.05)
                 document.getElementById("simonred").style.display = "block"
                 document.getElementById("simongreen").style.display = "block"
                 document.getElementById("simonblue").style.display = "block" 
                 document.getElementById("simonyellow").style.display = "block"
                 document.getElementById("simonreset").style.display = "block"
                 document.getElementById("sequence").style.display = "block"
-                document.getElementById("drainBtn").innerText = "Submit sequence"}
+                document.getElementById("streak").style.display = "block"
+                document.getElementById("drainBtn").innerText = "Submit sequence"
+                document.getElementById("streak").innerText = `Current streak ${streak}  Highest streak ${high}   providing a ${multi}x boost to productivity `}
+            
             
         
         }else {
@@ -126,6 +135,7 @@ async function main() {
                 document.getElementById("simonblue").style.display = "none" 
                 document.getElementById("simonyellow").style.display = "none"
                 document.getElementById("simonreset").style.display = "none"
+                document.getElementById("streak").style.display = "none"
                 document.getElementById("sequence").style.display = "none"}
         }
 
