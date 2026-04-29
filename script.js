@@ -1,6 +1,6 @@
 let pyodide;
 let game;
-let shown = False;
+let shown = 0;
 window.sequence = []
 game = "Simon"
 // Placeholders for Python functions. We will 'capture' these from game.py later.
@@ -55,7 +55,7 @@ async function main() {
     document.getElementById("simonplay").onclick = () => {
         test = pySimonSequence();
         document.getElementById("simonplay").insideText = test.length
-       // shown = True
+       // shown = 1
         updateDisplay(pyGetCurrency)
     };
 
@@ -66,7 +66,7 @@ async function main() {
             updateDisplay(result);
         } else{ 
             pyAttempt(window.sequence);
-            shown = False;
+            shown = 0;
             window.sequence = [];
             updateDisplay(pyClick());}
         
@@ -136,7 +136,7 @@ async function main() {
                 document.getElementById("streak").style.display = "block"
                 document.getElementById("drainBtn").innerText = "Submit sequence"
                 document.getElementById("streak").innerText = `Current streak ${streak}  Highest streak ${high}   providing a ${multi}x boost to productivity `}
-                if (shown == false){
+                if (shown == 0){
                     document.getElementById("simonplay").style.display = "block"}
                      
             
