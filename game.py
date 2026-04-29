@@ -188,7 +188,7 @@ def stop_drain():
     # Allows the player to 'fix' the drain and resume normal production
     drain.stop_drain()
     return currency
-def getstreak():
+def simongetstreak():
     return Simon.getstreak()
 def attempt(sequence):
     return Simon.attempt(sequence)
@@ -196,3 +196,5 @@ def getcurrency():
     return currency
 def sequence():
     return Simon.getsequence()
+def simongethigh():
+    return Simon.gethighscore()
