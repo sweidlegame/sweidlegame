@@ -194,7 +194,7 @@ def attempt(sequence):
     return Simon.attempt(sequence)
 def getcurrency():
     return currency
-def sequence():
-    return Simon.getsequence()
 def simongethigh():
     return Simon.gethighscore()
+def simongetsequence():
+    return Simon.getsequence()
