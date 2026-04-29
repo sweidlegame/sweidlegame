@@ -52,46 +52,37 @@ async function main() {
         let result = pyClick(); // Calls Python 'increment()'
         updateDisplay(result);
     };
-    document.getElementById("simonplay").onclick = () => {
-        test = pySimonSequence();
-        i = 0;
-        while  (i < test.length){
-            color = test[i]
-            if (color = "red") {
-                document.getElementById("red").style.display = "block"
-                document.getElementById("blue").style.display = "none"
-                document.getElementById("green").style.display = "none"
-                document.getElementById("yellow").style.display = "none"
-            }
-            if (color = "blue") {
-                document.getElementById("red").style.display = "none"
-                document.getElementById("blue").style.display = "block"
-                document.getElementById("green").style.display = "none"
-                document.getElementById("yellow").style.display = "none"
-            }
-            if (color = "green") {
-                document.getElementById("red").style.display = "none"
-                document.getElementById("blue").style.display = "none"
-                document.getElementById("green").style.display = "block"
-                document.getElementById("yellow").style.display = "none"
-            }
-            if (color = "yellow") {
-                document.getElementById("red").style.display = "none"
-                document.getElementById("blue").style.display = "none"
-                document.getElementById("green").style.display = "none"
-                document.getElementById("yellow").style.display = "block"
-            }
-            setTimeout(() => i++, 750);
-            
-        }
-                document.getElementById("red").style.display = "none"
-                document.getElementById("blue").style.display = "none"
-                document.getElementById("green").style.display = "none"
-                document.getElementById("yellow").style.display = "none"
-        shown = 1;
-        updateDisplay(pyGetCurrency)
-    };
+   document.getElementById("simonplay").onclick = () => {
+    const test = pySimonSequence();
+    let i = 0;
 
+    function showStep() {
+        if (i >= test.length) {
+            document.getElementById("red").style.display = "none";
+            document.getElementById("blue").style.display = "none";
+            document.getElementById("green").style.display = "none";
+            document.getElementById("yellow").style.display = "none";
+
+            shown = 1;
+            updateDisplay(pyGetCurrency);
+            return;
+        }
+
+        const color = test[i];
+
+        document.getElementById("red").style.display = "none";
+        document.getElementById("blue").style.display = "none";
+        document.getElementById("green").style.display = "none";
+        document.getElementById("yellow").style.display = "none";
+
+        document.getElementById(color).style.display = "block";
+
+        i++;
+        setTimeout(showStep, 750);
+    }
+
+    showStep();
+};
     // Clicking the "Fix Drain" button
     document.getElementById("drainBtn").onclick = () => {
         if (game != "Simon"){
