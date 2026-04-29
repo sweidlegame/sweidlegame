@@ -94,6 +94,10 @@ async function main() {
     
     // Updates the text and visibility of all UI elements based on current game state.    
     function updateDisplay(currency) {
+        document.getElementById("red").style.opacity = "0.0";
+        document.getElementById("blue").style.opacity = "0";
+        document.getElementById("green").style.opacity = "0.0";
+        document.getElementById("yellow").style.opacity = "0.0";
         let cps = pyCPS();                // Get base CPS from Python
         let drainActive = pyIsDrainActive(); // Check if drain is happening
         let multiplier = pyGetDrainMultiplier(); // Get current multiplier
@@ -124,6 +128,25 @@ async function main() {
                 document.getElementById("streak").style.display = "block"
                 document.getElementById("drainBtn").innerText = "Submit sequence"
                 document.getElementById("streak").innerText = `Current streak ${streak}  Highest streak ${high}   providing a ${multi}x boost to productivity `}
+                document.getElementById("red").style.opacity = "0.01";
+                document.getElementById("blue").style.opacity = "0.01";
+                document.getElementById("green").style.opacity = "0.01";
+                document.getElementById("yellow").style.opacity = "0.01";
+                if (test.length == 1){
+                    if (test[0] == "red"){
+                        document.getElementById("red").style.opacity = "1";
+                    }
+                    if (test[0] == "blue"){
+                        document.getElementById("blue").style.opacity = "1";
+                    }
+                    if (test[0] == "green"){
+                        document.getElementById("green").style.opacity = "1";
+                    }
+                    if (test[0] == "yellow"){
+                        document.getElementById("yellow").style.opacity = "1";
+                    }
+                }
+                     
             
             
         
