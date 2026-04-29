@@ -1,6 +1,6 @@
 let pyodide;
 let game;
-let sequence = []
+window.sequence = []
 game = "Simon"
 // Placeholders for Python functions. We will 'capture' these from game.py later.
 let pyClick, pySecond, pyCPS;
@@ -55,8 +55,8 @@ async function main() {
             let result = pyStopDrain(); // Calls Python 'stop_drain()'
             updateDisplay(result);
         } else{ 
-            pyAttempt(sequence);
-            sequence = [];
+            pyAttempt(window.sequence);
+            window.sequence = [];
             updateDisplay(pyClick());}
         
     };
@@ -71,23 +71,23 @@ async function main() {
     }
 
     simonred.onclick = () => {
-            sequence.push("red")
+            window.sequence.push("red")
             updateDisplay(pyClick());
     };
     simonblue.onclick = () => {
-            sequence.push("blue")
+            window.sequence.push("blue")
             updateDisplay(pyClick());
     };
     simongreen.onclick = () => {
-            sequence.push("green")
+            window.sequence.push("green")
             updateDisplay(pyClick());
     };
     simonyellow.onclick = () => {
-            sequence.push("yellow")
+            window.sequence.push("yellow")
             updateDisplay(pyClick());
     };
     simonreset.onclick = () => {
-            sequence = []
+            window.sequence = []
             updateDisplay(pyClick());
     };
 
@@ -110,7 +110,7 @@ async function main() {
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
             document.getElementById("sequence").innerText =
-                `Sequence: ${sequence}, Correct sequence for testing:  ${test} `;
+                `Sequence: ${window.sequence}, Correct sequence for testing:  ${test} `;
             if (game == "Simon"){
                 let streak = pySimonGetStreak();
                 let high = pySimonGetHigh();
