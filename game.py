@@ -194,4 +194,5 @@ def attempt(sequence):
     return Simon.attempt(sequence)
 def getcurrency():
     return currency
-    
+def sequence():
+    return Simon.getsequence()
