@@ -68,15 +68,24 @@ async function main() {
             return;
         }
 
-        const color = test[i];
+        
 
         document.getElementById("red").style.display = "none";
         document.getElementById("blue").style.display = "none";
         document.getElementById("green").style.display = "none";
         document.getElementById("yellow").style.display = "none";
-
-        document.getElementById(color).style.display = "block";
-
+        if (test[i] == "red"){
+             document.getElementById("red").style.display = "block";
+        }
+       if (test[i] == "blue"){
+             document.getElementById("blue").style.display = "block";
+        }
+        if (test[i] == "green"){
+             document.getElementById("green").style.display = "block";
+        }
+        if (test[i] == "yellow"){
+             document.getElementById("yellow").style.display = "block";
+        }
         i++;
         setTimeout(showStep, 750);
     }
