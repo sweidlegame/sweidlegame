@@ -1,5 +1,6 @@
 let pyodide;
 let game;
+let sequence = []
 game = "Simon"
 // Placeholders for Python functions. We will 'capture' these from game.py later.
 let pyClick, pySecond, pyCPS;
@@ -38,7 +39,7 @@ async function main() {
     pySimonGetHigh = pyodide.globals.get("simongethigh");
     pySimonSequence = pyodide.globals.get("simongetsequence");
     
-    let sequence = []
+    
 
     // --- EVENT LISTENERS ---
 
