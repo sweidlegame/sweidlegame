@@ -80,7 +80,7 @@ class Simon:
     def attempt(self,playerseq):
         i = 0
         while i < len(self.sequence):
-            if playerseq[i] == self.sequence[i]:
+            if len(playerseq) == len(self.sequence) and playerseq[i] == self.sequence[i]:
                 True
             else:
                 if self.currentstreak > self.requirement:
@@ -106,7 +106,7 @@ class Simon:
 # --- GLOBAL GAME STATE ---
 currency = 10             # Total money available to spend
 currencypersecond = 0    # Total money earned every second (starts at 1)
-Simon = Simon(0,7)
+Simon = Simon(0,3)
 Simon.clearlose()
 # Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
 drain = Drain(0.25, 0.5)
