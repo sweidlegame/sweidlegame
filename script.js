@@ -1,5 +1,6 @@
 let pyodide;
 let game;
+let shown = False;
 window.sequence = []
 game = "Simon"
 // Placeholders for Python functions. We will 'capture' these from game.py later.
@@ -7,11 +8,13 @@ let pyClick, pySecond, pyCPS;
 let pyBuyProducer, pyGetPrice, pyGetOwned, pyGetProduction;
 let pyIsDrainActive, pyStopDrain;
 let pyGetDrainMultiplier;
+let test;
 
 
 
 // The core setup function. Runs once when the page loads. 
 async function main() {
+
     // Initialize Pyodide (Downloading the Python runtime)
     pyodide = await loadPyodide();
     game = "Simon"; //Game lock if we want to add others later, not expected to be touched.
@@ -38,6 +41,7 @@ async function main() {
     pyAttempt = pyodide.globals.get("attempt");
     pySimonGetHigh = pyodide.globals.get("simongethigh");
     pySimonSequence = pyodide.globals.get("simongetsequence");
+    pyGetCurrency = pyodide.globals.get("getcurrency");
     
     
 
@@ -48,6 +52,12 @@ async function main() {
         let result = pyClick(); // Calls Python 'increment()'
         updateDisplay(result);
     };
+    document.getElementById("simonplay").onclick = () => {
+        test = pySimonSequence();
+        document.getElementById("simonplay").insideText = test.length
+       // shown = True
+        updateDisplay(pyGetCurrency)
+    };
 
     // Clicking the "Fix Drain" button
     document.getElementById("drainBtn").onclick = () => {
@@ -56,6 +66,7 @@ async function main() {
             updateDisplay(result);
         } else{ 
             pyAttempt(window.sequence);
+            shown = False;
             window.sequence = [];
             updateDisplay(pyClick());}
         
@@ -94,10 +105,7 @@ async function main() {
     
     // Updates the text and visibility of all UI elements based on current game state.    
     function updateDisplay(currency) {
-        document.getElementById("red").style.opacity = "0.0";
-        document.getElementById("blue").style.opacity = "0";
-        document.getElementById("green").style.opacity = "0.0";
-        document.getElementById("yellow").style.opacity = "0.0";
+
         let cps = pyCPS();                // Get base CPS from Python
         let drainActive = pyIsDrainActive(); // Check if drain is happening
         let multiplier = pyGetDrainMultiplier(); // Get current multiplier
@@ -109,7 +117,7 @@ async function main() {
         // Update CPS display and show if a drain is reducing income
         if (drainActive) {
             let effective = cps * multiplier;
-            let test = pySimonSequence();
+            test = pySimonSequence();
             document.getElementById("drainBtn").innerText = "Fix Drain"
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
@@ -128,7 +136,8 @@ async function main() {
                 document.getElementById("streak").style.display = "block"
                 document.getElementById("drainBtn").innerText = "Submit sequence"
                 document.getElementById("streak").innerText = `Current streak ${streak}  Highest streak ${high}   providing a ${multi}x boost to productivity `}
-
+                if (shown == false){
+                    document.getElementById("simonplay").style.display = "block"}
                      
             
             
