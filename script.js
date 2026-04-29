@@ -67,7 +67,7 @@ async function main() {
             updateDisplay(pyGetCurrency);
             return;
         }
-        document.getElementById("simonplay").innerText = `${test[i]}   of type   ${typeof test[i]}`
+        document.getElementById("simonplay").innerText = `${test[i]}   of type   ${typeof test[i]}    from  ${test}`
         
 
         document.getElementById("red").style.display = "none";
