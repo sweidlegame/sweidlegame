@@ -76,7 +76,7 @@ class Simon:
         return random.choice(["red", "green", "blue","yellow"])
         
     def step(self):
-        self.sequence.append(genentry())
+        self.sequence.append(self.genentry())
     def attempt(self,playerseq):
         i = 0
         while i < len(self.sequence):
