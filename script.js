@@ -105,7 +105,7 @@ async function main() {
         // Update CPS display and show if a drain is reducing income
         if (drainActive) {
             let effective = cps * multiplier;
-            let test = pyGetSequence();
+            let test = pySimonSequence();
             document.getElementById("drainBtn").innerText = "Fix Drain"
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
