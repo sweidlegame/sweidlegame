@@ -75,7 +75,7 @@ class Simon:
         return random.choice(["red", "green", "blue","yellow"])
         
     def step(self):
-        sequence = sequence.append(genentry())
+        self.sequence = sequence.append(genentry())
     def attempt(self,playerseq):
         i = 0
         while i < len(self.sequence):
@@ -105,7 +105,7 @@ class Simon:
 # --- GLOBAL GAME STATE ---
 currency = 10             # Total money available to spend
 currencypersecond = 0    # Total money earned every second (starts at 1)
-
+Simon = Simon(0,7)
 # Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
 drain = Drain(0.25, 0.5)
 
@@ -117,7 +117,7 @@ producers = [
     Producer(10000, 100),
     Producer(50000, 300)  # Expensive, high yield
 ]
-Simon = Simon(0,7)
+
 
 
 # --- API FUNCTIONS (Called by JavaScript) ---
