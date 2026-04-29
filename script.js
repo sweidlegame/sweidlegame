@@ -52,8 +52,9 @@ async function main() {
             let result = pyStopDrain(); // Calls Python 'stop_drain()'
             updateDisplay(result);
         } else{ 
-            pyAttempt(sequence)
-            sequence = []}
+            pyAttempt(sequence);
+            sequence = [];
+            updateDisplay(pyClick());}
         
     };
 
