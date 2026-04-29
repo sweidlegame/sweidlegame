@@ -69,7 +69,7 @@ class Simon:
         self.step()
     def clearwin(self):
         #Repel drain and clear for next use on event of loss of a streak that already passed the victory point
-        Drain.stop_drain()
+        drain.stop_drain()
         self.clearlose()
 
     def genentry(self):
