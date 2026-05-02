@@ -14,7 +14,7 @@ class Producer:
         global currencypersecond
         self.owned = owned
 	
-        currencypersecond = self.production * owned
+        currencypersecond += self.production * owned
 
         for i in range(owned):
 	        self.price = self.price ** 1.12
