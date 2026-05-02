@@ -131,10 +131,10 @@ class SaveFile:
         js.localStorage.setItem("saved_data", json_data)
 
 
-    def loadfile(self)
+    def loadfile(self):
         raw_data = js.localStorage.getItem("saved_data")
 		
-	if raw_data:
+        if raw_data:
             return json.load(raw_data)
 		
         return {}
