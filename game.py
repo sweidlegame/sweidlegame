@@ -125,7 +125,7 @@ class SaveFile:
         self.data["Streak"] = streak
 
         for i in range(len(producers)):
-            self.data[i] = producers[i].owned
+            self.data[str(i)] = producers[i].owned
 
         json_data = json.dumps(self.data)
         js.localStorage.setItem("saved_data", json_data)
@@ -172,7 +172,7 @@ def load():
         Simon.streak = data["Streak"]
 	
         for i in range(len(producers)):
-            producers[i].setOwned(data[i])
+            producers[i].setOwned(data[str(i)])
 		
 
 def increment():
