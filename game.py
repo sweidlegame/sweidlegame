@@ -135,7 +135,7 @@ class SaveFile:
         raw_data = js.localStorage.getItem("saved_data")
 		
         if raw_data:
-            return json.load(raw_data)
+            return json.loads(raw_data)
 		
         return {}
 
