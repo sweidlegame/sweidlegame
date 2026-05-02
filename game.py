@@ -1,11 +1,23 @@
 import random
 import math
+import js
+import json
+
 class Producer: 
     # Represents an item the player can buy to generate currency automatically.
     def __init__(self, price, production):
         self.owned = 0           # How many of this producer the player has
         self.price = price       # Current cost to buy one
         self.production = production # How much currency this generates per unit
+	
+    def setOwned(self, owned):
+	self.owned = owned
+	
+	currencypersecond = self.production * owned
+
+	for i in range(owned):
+		self.price = self.price ** 1.12
+		self.price = math.ceil(self.price)
 
     def purchase(self):
         # Attempts to buy a producer. Deducts currency and scales the price.
@@ -100,7 +112,31 @@ class Simon:
         return self.currentstreak
     def getsequence(self):
         return self.sequence
-        
+
+
+class SaveFile:
+    def __init__(self):
+        self.data = {}
+
+
+    def savefile(self, currency, producers, streak):
+	self.data["Currency"] = currency
+	self.data["Streak"] = streak
+
+	for i in range(len(producers)):
+		self.data[i] = producers[i].owned
+
+        json_data = json.dumps(self.data)
+        js.localStorage.setItem("saved_data", json_data)
+
+
+    def loadfile(self)
+        raw_data = js.localStorage.getItem("saved_data")
+		
+	if raw_data:
+            return json.load(raw_data)
+		
+        return {}
 
 
 # --- GLOBAL GAME STATE ---
@@ -110,6 +146,7 @@ Simon = Simon(0,3)
 Simon.clearlose()
 # Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
 drain = Drain(0.25, 0.5)
+save = SaveFile()
 
 # Initialize a list of Producer objects with varying prices and yields
 producers = [
@@ -123,6 +160,19 @@ producers = [
 
 
 # --- API FUNCTIONS (Called by JavaScript) ---
+def save():
+	save.savefile(currency, producers, Simon.gethighscore())
+
+def load():
+    data = save.loadfile()
+	
+    if data:
+        currency = data["Currency"]
+	Simon.streak = data["Streak"]
+	
+        for i in range(len(producers)):
+	    producers[i].setOwned(data[i])
+		
 
 def increment():
     # Manual click function: Adds CPS to currency immediately

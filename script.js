@@ -42,8 +42,12 @@ async function main() {
     pySimonGetHigh = pyodide.globals.get("simongethigh");
     pySimonSequence = pyodide.globals.get("simongetsequence");
     pyGetCurrency = pyodide.globals.get("getcurrency");
-    
-    
+    pySaveGame = pyodide.globals.get("save");
+    pyLoadGame = pyodide.globals.get("load");
+
+    	
+    pyLoadGame()
+        
 
     // --- EVENT LISTENERS ---
 
@@ -135,7 +139,13 @@ async function main() {
             updateDisplay(pyClick());
     };
 
-    
+    // Saves game when button is clicked
+    let savebtn = document.getElementById("save");
+    savebtn.onclick = () => {
+        pySaveGame()
+
+    }
+
     // Updates the text and visibility of all UI elements based on current game state.    
     function updateDisplay(currency) {
 
