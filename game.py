@@ -124,8 +124,8 @@ class SaveFile:
         self.data["Currency"] = currency
         self.data["Streak"] = streak
 
-	for i in range(len(producers)):
-		self.data[i] = producers[i].owned
+        for i in range(len(producers)):
+            self.data[i] = producers[i].owned
 
         json_data = json.dumps(self.data)
         js.localStorage.setItem("saved_data", json_data)
