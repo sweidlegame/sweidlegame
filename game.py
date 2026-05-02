@@ -14,11 +14,11 @@ class Producer:
         global currencypersecond
         self.owned = owned
 	
-	    currencypersecond = self.production * owned
+        currencypersecond = self.production * owned
 
-	    for i in range(owned):
-		    self.price = self.price ** 1.12
-		    self.price = math.ceil(self.price)
+        for i in range(owned):
+	        self.price = self.price ** 1.12
+	        self.price = math.ceil(self.price)
 
     def purchase(self):
         # Attempts to buy a producer. Deducts currency and scales the price.
