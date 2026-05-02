@@ -169,10 +169,10 @@ def load():
 	
     if data:
         currency = data["Currency"]
-	Simon.streak = data["Streak"]
+        Simon.streak = data["Streak"]
 	
         for i in range(len(producers)):
-	    producers[i].setOwned(data[i])
+            producers[i].setOwned(data[i])
 		
 
 def increment():
