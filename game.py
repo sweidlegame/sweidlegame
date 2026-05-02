@@ -128,11 +128,15 @@ class SaveFile:
             self.data[str(i)] = producers[i].owned
 
         json_data = json.dumps(self.data)
-        js.localStorage.setItem("saved_data", json_data)
+        #js.localStorage.setItem("saved_data", json_data)
+
+        js.window.prompt("Copy your save code below:", json_data)
 
 
     def loadfile(self):
-        raw_data = js.localStorage.getItem("saved_data")
+        #raw_data = js.localStorage.getItem("saved_data")
+
+		raw_data = js.window.prompt("Paste your save code here:")
 		
         if raw_data:
             return json.loads(raw_data)
