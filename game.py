@@ -138,10 +138,10 @@ class SaveFile:
         raw_data2 = js.window.prompt("Paste your save code here:")
 
         try:
-			return json.laod(raw_data)
+            return json.laod(raw_data)
 
-		except Exception as e:
-			js.window.alert("Invalid save code")
+        except Exception as e:
+            js.window.alert("Invalid save code")
 		
         return {}
 
