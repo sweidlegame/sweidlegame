@@ -135,10 +135,10 @@ class SaveFile:
 
     def loadfile(self):
         #raw_data1 = js.localStorage.getItem("saved_data")
-        raw_data2 = js.window.prompt("Paste your save code here:")
+        raw_data = js.window.prompt("Paste your save code here:")
 
         try:
-            return json.laod(raw_data)
+            return json.loads(raw_data)
 
         except Exception as e:
             js.window.alert("Invalid save code")
