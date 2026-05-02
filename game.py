@@ -128,17 +128,20 @@ class SaveFile:
             self.data[str(i)] = producers[i].owned
 
         json_data = json.dumps(self.data)
-        js.localStorage.setItem("saved_data", json_data)
+        #js.localStorage.setItem("saved_data", json_data)
 
         js.window.prompt("Copy your save code below:", json_data)
 
 
     def loadfile(self):
-        raw_data1 = js.localStorage.getItem("saved_data")
+        #raw_data1 = js.localStorage.getItem("saved_data")
         raw_data2 = js.window.prompt("Paste your save code here:")
-		
-        if raw_data1 == raw_data2:
-            return json.loads(raw_data)
+
+        try:
+			return json.laod(raw_data)
+
+		except Exception as e:
+			js.window.alert("Invalid save code")
 		
         return {}
 
