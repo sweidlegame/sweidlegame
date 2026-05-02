@@ -165,6 +165,8 @@ def save():
 	savef.savefile(currency, producers, Simon.gethighscore())
 
 def load():
+    global currency
+	
     data = savef.loadfile()
 	
     if data:
