@@ -147,7 +147,7 @@ Simon = Simon(0,3)
 Simon.clearlose()
 # Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
 drain = Drain(0.25, 0.5)
-save = SaveFile()
+savef = SaveFile()
 
 # Initialize a list of Producer objects with varying prices and yields
 producers = [
@@ -162,10 +162,10 @@ producers = [
 
 # --- API FUNCTIONS (Called by JavaScript) ---
 def save():
-	save.savefile(currency, producers, Simon.gethighscore())
+	savef.savefile(currency, producers, Simon.gethighscore())
 
 def load():
-    data = save.loadfile()
+    data = savef.loadfile()
 	
     if data:
         currency = data["Currency"]
