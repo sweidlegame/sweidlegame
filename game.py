@@ -11,7 +11,7 @@ class Producer:
         self.production = production # How much currency this generates per unit
 	
     def setOwned(self, owned):
-		global currencypersecond
+        global currencypersecond
         self.owned = owned
 	
 	    currencypersecond = self.production * owned
