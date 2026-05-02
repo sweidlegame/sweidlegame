@@ -121,8 +121,8 @@ class SaveFile:
 
 
     def savefile(self, currency, producers, streak):
-	self.data["Currency"] = currency
-	self.data["Streak"] = streak
+        self.data["Currency"] = currency
+        self.data["Streak"] = streak
 
 	for i in range(len(producers)):
 		self.data[i] = producers[i].owned
