@@ -15,7 +15,7 @@ class Producer:
         global currencypersecond
         self.owned = owned
 	
-        currencypersecond += self.production * owned
+        currencypersecond += self.production * owned * self.upgrademultiplier
 
         for i in range(owned):
 	        self.price = self.price ** 1.12
@@ -130,7 +130,7 @@ class SaveFile:
         self.data["Streak"] = streak
 
         for i in range(len(producers)):
-            self.data[str(i)] = producers[i].owned
+            self.data[str(i)] = (producers[i].owned, producers[i].getmulti())
 
         json_data = json.dumps(self.data)
         #js.localStorage.setItem("saved_data", json_data)
@@ -185,7 +185,9 @@ def load():
         Simon.streak = data["Streak"]
 	
         for i in range(len(producers)):
-            producers[i].setOwned(data[str(i)])
+			info = data[str(i)]
+            producers[i].setmulti(info[1])
+            producers[i].setOwned(info[0])
 		
 
 def increment():
