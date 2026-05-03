@@ -150,7 +150,7 @@ async function main() {
     // Updates the text and visibility of all UI elements based on current game state.    
     function updateDisplay(currency) {
 
-        let cps = pyCPS();                // Get base CPS from Python
+        let cps = pyCPS().toFixed(2);        // Get base CPS from Python
         let drainActive = pyIsDrainActive(); // Check if drain is happening
         let multiplier = pyGetDrainMultiplier(); // Get current multiplier
 
