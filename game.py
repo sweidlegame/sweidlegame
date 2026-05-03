@@ -31,7 +31,7 @@ class Producer:
             self.owned += 1
 
             # Increase the base Currency Per Second (CPS)
-            currencypersecond += self.production * self.upgrademultiplier * (self.owned%10 + 1)
+            currencypersecond += self.production * self.upgrademultiplier * (self.owned%10*0.2 + 1)
 
             # Exponential scaling: The price increases exponentially to prevent reliance on one producer, but still keep them useful for a few sequential purchases
             self.price = self.price ** 1.12
@@ -157,8 +157,8 @@ currency = 10             # Total money available to spend
 currencypersecond = 0    # Total money earned every second (starts at 1)
 Simon = Simon(0,3)
 Simon.clearlose()
-# Initialize the Drain: Occurs every 15 seconds (0.25 min), cuts income by 50% (0.5)
-drain = Drain(0.25, 0.5)
+# Initialize the Drain: Occurs every 120 seconds (2 min), cuts income by 50% (0.5)
+drain = Drain(2, 0.5)
 savef = SaveFile()
 
 # Initialize a list of Producer objects with varying prices and yields
