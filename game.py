@@ -31,7 +31,9 @@ class Producer:
             self.owned += 1
 
             # Increase the base Currency Per Second (CPS)
-            currencypersecond += self.production * self.upgrademultiplier * (math.floor(self.owned/10)*0.2 + 1)
+            if self.owned%10 == 0:
+                self.production *= 0.2
+            currencypersecond += self.production * self.upgrademultiplier
 
             # Exponential scaling: The price increases exponentially to prevent reliance on one producer, but still keep them useful for a few sequential purchases
             self.price = self.price ** 1.12
