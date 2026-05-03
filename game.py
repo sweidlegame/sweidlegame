@@ -9,6 +9,7 @@ class Producer:
         self.owned = 0           # How many of this producer the player has
         self.price = price       # Current cost to buy one
         self.production = production # How much currency this generates per unit
+		self.upgrademultiplier = 1
 	
     def setOwned(self, owned):
         global currencypersecond
@@ -30,13 +31,17 @@ class Producer:
             self.owned += 1
 
             # Increase the base Currency Per Second (CPS)
-            currencypersecond += self.production
+            currencypersecond += self.production * self.upgrademultiplier
 
             # Exponential scaling: The price increases exponentially to prevent reliance on one producer, but still keep them useful for a few sequential purchases
             self.price = self.price ** 1.12
             self.price = math.ceil(self.price)
 
         return currency
+	def getmulti(self):
+		return self.upgrademultiplier
+	def setmulti(self,multi):
+		self.upgrademultiplier = multi
 
 
 class Drain:
