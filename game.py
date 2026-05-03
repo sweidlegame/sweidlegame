@@ -9,7 +9,7 @@ class Producer:
         self.owned = 0           # How many of this producer the player has
         self.price = price       # Current cost to buy one
         self.production = production # How much currency this generates per unit
-		self.upgrademultiplier = 1
+        self.upgrademultiplier = 1
 	
     def setOwned(self, owned):
         global currencypersecond
@@ -38,10 +38,10 @@ class Producer:
             self.price = math.ceil(self.price)
 
         return currency
-	def getmulti(self):
-		return self.upgrademultiplier
-	def setmulti(self,multi):
-		self.upgrademultiplier = multi
+    def getmulti(self):
+        return self.upgrademultiplier
+    def setmulti(self,multi):
+        self.upgrademultiplier = multi
 
 
 class Drain:
