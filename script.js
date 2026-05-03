@@ -187,7 +187,7 @@ async function main() {
         
         }else { // When the drain is inactive
             document.getElementById("CPS").innerText =
-                "Currency Per Second: " + cps.toFixed(2);
+                "Currency Per Second: " + Number(cps).toFixed(2);
             if (game == "Simon"){
                 document.getElementById("simonred").style.display = "none"
                 document.getElementById("simongreen").style.display = "none"
