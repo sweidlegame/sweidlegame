@@ -219,7 +219,7 @@ def second():
 
     # Calculate income: (Base CPS) * (0.5 if drain is active, else 1.0)
     currency += currencypersecond * multiplier
-    return currency
+    return round(currency, 3)
 
 
 def CPS():
