@@ -33,6 +33,7 @@ class Producer:
             # Increase the base Currency Per Second (CPS)
             if self.owned%10 == 0:
                 self.production *= 0.2
+                self.production = round(self.production, 2)
             currencypersecond += self.production * self.upgrademultiplier
 
             # Exponential scaling: The price increases exponentially to prevent reliance on one producer, but still keep them useful for a few sequential purchases
@@ -219,7 +220,7 @@ def second():
 
     # Calculate income: (Base CPS) * (0.5 if drain is active, else 1.0)
     currency += currencypersecond * multiplier
-    return round(currency, 3)
+    return currency
 
 
 def CPS():
