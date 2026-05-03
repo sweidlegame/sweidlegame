@@ -164,7 +164,7 @@ async function main() {
             test = pySimonSequence();
             document.getElementById("drainBtn").innerText = "Fix Drain"
             document.getElementById("CPS").innerText =
-                `Currency Per Second: ${cps} → ${Math.floor(effective)} (drained)`;
+                `Currency Per Second: ${cps.toFixed(2)} → ${effective.toFixed(2)} (drained)`;
             document.getElementById("sequence").innerText =
                 `Sequence: ${window.sequence}, Correct sequence for testing:  ${test} `;
             if (game == "Simon"){
@@ -185,9 +185,9 @@ async function main() {
             
             
         
-        }else {
+        }else { // When the drain is inactive
             document.getElementById("CPS").innerText =
-                "Currency Per Second: " + cps;
+                "Currency Per Second: " + cps.toFixed(2);
             if (game == "Simon"){
                 document.getElementById("simonred").style.display = "none"
                 document.getElementById("simongreen").style.display = "none"
@@ -228,7 +228,7 @@ async function main() {
                 btn.innerText = `Buy Producer ${i + 1} (${price})`;
             } else {
                 btn.innerText =
-                    `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned} | Producing: ${producing} each, ${total} total`;
+                    `Upgrade Producer ${i + 1} (${price}) | Owned: ${owned} | Producing: ${producing.toFixed(2)} each, ${total.toFixed(2)} total`;
             }
         }
     }
