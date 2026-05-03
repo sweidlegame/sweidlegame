@@ -31,11 +31,12 @@ class Producer:
             self.owned += 1
 
             # Increase the base Currency Per Second (CPS)
-            currencypersecond += self.production * self.upgrademultiplier
+            currencypersecond += self.production * self.upgrademultiplier * (self.owned%10 + 1)
 
             # Exponential scaling: The price increases exponentially to prevent reliance on one producer, but still keep them useful for a few sequential purchases
             self.price = self.price ** 1.12
             self.price = math.ceil(self.price)
+
 
         return currency
     def getmulti(self):
