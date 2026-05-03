@@ -164,7 +164,7 @@ async function main() {
             test = pySimonSequence();
             document.getElementById("drainBtn").innerText = "Fix Drain"
             document.getElementById("CPS").innerText =
-                `Currency Per Second: ${cps.toFixed(2)} → ${effective.toFixed(2)} (drained)`;
+                `Currency Per Second: ${Number(cps).toFixed(2)} → ${Number(effective).toFixed(2)} (drained)`;
             document.getElementById("sequence").innerText =
                 `Sequence: ${window.sequence}, Correct sequence for testing:  ${test} `;
             if (game == "Simon"){
