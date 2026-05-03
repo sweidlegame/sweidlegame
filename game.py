@@ -185,7 +185,7 @@ def load():
         Simon.streak = data["Streak"]
 	
         for i in range(len(producers)):
-			info = data[str(i)]
+            info = data[str(i)]
             producers[i].setmulti(info[1])
             producers[i].setOwned(info[0])
 		
