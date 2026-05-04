@@ -2,6 +2,7 @@ import random
 import math
 import js
 import json
+import base64
 
 class Producer: 
     # Represents an item the player can buy to generate currency automatically.
@@ -137,17 +138,21 @@ class SaveFile:
             self.data[str(i)] = (producers[i].owned, producers[i].getmulti())
 
         json_data = json.dumps(self.data)
-        #js.localStorage.setItem("saved_data", json_data)
 
-        js.window.prompt("Copy your save code below:", json_data)
+        raw_bytes = json_data.encode("utf-8")
+        encoded_bytes = base64.b64encode(raw_bytes)
+        encoded_string = encoded_bytes.decode("utf-8")
+
+        js.window.prompt("Copy your save code below:", encoded_string)
 
 
     def loadfile(self):
-        #raw_data1 = js.localStorage.getItem("saved_data")
         raw_data = js.window.prompt("Paste your save code here:")
 
         try:
-            return json.loads(raw_data)
+            decoded_bytes = base64.b64decode(raw_data)
+            json_data = decoded_bytes.decode("utf-8")
+            return json.loads(json_data)
 
         except Exception as e:
             js.window.alert("Invalid save code")
