@@ -166,7 +166,7 @@ async function main() {
             document.getElementById("CPS").innerText =
                 `Currency Per Second: ${Number(cps).toFixed(2)} → ${Number(effective).toFixed(2)} (drained)`;
             document.getElementById("sequence").innerText =
-                `Sequence: ${window.sequence}, Correct sequence for testing:  ${test} `;
+                `Sequence: ${window.sequence}, Sequence:  ${test} `;
             if (game == "Simon"){
                 let streak = pySimonGetStreak();
                 let high = pySimonGetHigh();
@@ -180,7 +180,7 @@ async function main() {
                 document.getElementById("streak").style.display = "block"
                 document.getElementById("drainBtn").innerText = "Submit sequence"
                 document.getElementById("streak").innerText = `Current streak ${streak}  Highest streak ${high}   providing a ${multi}x boost to productivity `}
-                document.getElementById("simonplay").style.display = "block"
+                document.getElementById("simonplay").style.display = "none"
                      
             
             
